@@ -17,7 +17,7 @@
 
 @layer components {
   .button {
-    @apply bg-black text-white px-5 py-2;
+    @apply bg-black text-white px-5 py-2 hover:opacity-50;
   }
   ,
   .disabled {
@@ -26,6 +26,9 @@
   ,
   .input {
     @apply h-10 pl-2 w-60;
+  },
+  .icon {
+    @apply hover:bg-gray-200 cursor-pointer mr-4;
   }
 }
 

@@ -18,16 +18,17 @@ export const Item: FC<IProps> = ({ id, text }) => {
   };
   const submit = (data: Omit<IQuestion, "id">) => {
     dispatch(updateQustion(id, data));
+    setEdit(false);
   };
 
   return edit ? (
-    <Form submit={submit} />
+    <Form mode="edit" submit={submit} text={text} />
   ) : (
-    <div className="flex justify-between group p-4">
-      <h2 className="">{text}</h2>
-      <div className="hidden group-hover:block">
-        <RiEdit2Line onClick={() => setEdit(true)} />
-        <RiDeleteBinLine onClick={deleteItem} />
+    <div className="group p-4 bg-white">
+      <h2 className="text-2xl">Q: {text}</h2>
+      <div className="flex mt-4">
+        <RiEdit2Line className="icon" onClick={() => setEdit(true)} size={25} />
+        <RiDeleteBinLine className="icon" onClick={deleteItem} size={25} />
       </div>
     </div>
   );

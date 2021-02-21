@@ -39,7 +39,7 @@ export default function Index() {
           全削除
         </button>
       </div>
-      <Form submit={submit} />
+      <Form mode="add" submit={submit} />
       <List list={questions} />
     </FormProvider>
   );

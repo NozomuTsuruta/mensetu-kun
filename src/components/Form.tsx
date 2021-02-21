@@ -4,18 +4,21 @@ import { IQuestion } from "../redux/questions/types";
 
 type IProps = {
   submit: (data: Omit<IQuestion, "id">) => void;
+  mode: "add" | "edit";
+  text?: string;
 };
 
-export const Form: FC<IProps> = ({ submit }) => {
+export const Form: FC<IProps> = ({ submit, mode, text }) => {
   const {
     handleSubmit,
     register,
     formState: { isDirty },
     errors,
   } = useFormContext();
+  const modeText = mode === "add" ? "追加" : "更新";
 
   return (
-    <form className="flex" onSubmit={handleSubmit(submit)}>
+    <form className="flex mb-4" onSubmit={handleSubmit(submit)}>
       <input
         type="text"
         name="text"
@@ -28,14 +31,15 @@ export const Form: FC<IProps> = ({ submit }) => {
             message: "8文字以上入力してください",
           },
         })}
-        placeholder={errors.text ? errors.text.message : "質問を追加"}
+        placeholder={errors.text ? errors.text.message : `質問を${modeText}`}
+        defaultValue={text || ""}
       />
       <button
         type="submit"
         disabled={!isDirty || errors.text}
         className={`button ${!isDirty || errors.text ? "disabled" : ""}`}
       >
-        追加
+        {modeText}
       </button>
     </form>
   );
