@@ -5,7 +5,7 @@
 @layer base {
   html,
   body {
-    @apply bg-gray-100 h-full text-sub overflow-hidden;
+    @apply bg-gray-100 h-full overflow-hidden;
   }
   ,
   a,

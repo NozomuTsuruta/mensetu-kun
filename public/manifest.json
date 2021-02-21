@@ -53,5 +53,13 @@
   "theme_color": "#282c34",
   "description": "簡単に面接練習",
   "dir": "ltr",
-  "lang": "ja-JP"
+  "lang": "ja-JP",
+  "permissions": {
+    "audio-capture": {
+      "description": "Audio capture"
+    },
+    "speech-recognition": {
+      "description": "Speech recognition"
+    }
+  }
 }
