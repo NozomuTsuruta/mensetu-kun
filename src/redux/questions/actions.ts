@@ -58,6 +58,9 @@ export const deleteQuestion = (id: string) => async (dispatch: Dispatch) => {
 };
 
 export const deleteAllQuestion = () => async (dispatch: Dispatch) => {
+  if (!confirm("全ての質問を削除しますか？")) {
+    return;
+  }
   try {
     await questionsTable.clear();
     dispatch({

@@ -23,6 +23,10 @@
   .disabled {
     @apply cursor-not-allowed opacity-50;
   }
+  ,
+  .input {
+    @apply h-10 pl-2 w-60;
+  }
 }
 
 @layer utilities {
