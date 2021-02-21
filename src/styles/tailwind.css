@@ -5,7 +5,7 @@
 @layer base {
   html,
   body {
-    @apply bg-gray-100 h-full overflow-hidden;
+    @apply bg-gray-100 h-full overflow-hidden font-stick;
   }
   ,
   a,
@@ -16,6 +16,13 @@
 }
 
 @layer components {
+  .button {
+    @apply bg-black text-white px-5 py-2;
+  }
+  ,
+  .disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
 }
 
 @layer utilities {

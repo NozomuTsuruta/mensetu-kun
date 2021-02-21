@@ -9,9 +9,9 @@ export const Wrapper: FC = ({ children }) => {
     dispatch(readQuestions());
   }, [dispatch]);
   return (
-    <div>
+    <>
       <Header />
-      {children}
-    </div>
+      <div className="px-8">{children}</div>
+    </>
   );
 };

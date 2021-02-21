@@ -10,8 +10,7 @@ export const Form: FC<IProps> = ({ submit }) => {
   const { handleSubmit, register } = useFormContext();
   return (
     <form className="flex" onSubmit={handleSubmit(submit)}>
-      <input type="text" name="text" ref={register} />
-      <input type="number" name="time" ref={register} />
+      <input type="text" name="text" className="" ref={register} />
       <button type="submit">追加</button>
     </form>
   );

@@ -8,10 +8,9 @@ type IProps = {
 export const List: FC<IProps> = ({ list }) => {
   return (
     <ul>
-      {list.map(({ id, text, time }) => (
+      {list.map(({ id, text }) => (
         <li key={id}>
           <p>{text}</p>
-          <p>{time}</p>
         </li>
       ))}
     </ul>
