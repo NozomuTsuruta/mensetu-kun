@@ -22,9 +22,9 @@ export const Item: FC<IProps> = ({ id, text }) => {
   };
 
   return edit ? (
-    <Form mode="edit" submit={submit} text={text} />
+    <Form mode="edit" submit={submit} text={text} setEdit={setEdit} />
   ) : (
-    <div className="group p-4 bg-white">
+    <div className="group p-4 bg-white mb-4">
       <h2 className="text-2xl">Q: {text}</h2>
       <div className="flex mt-4">
         <RiEdit2Line className="icon" onClick={() => setEdit(true)} size={25} />
