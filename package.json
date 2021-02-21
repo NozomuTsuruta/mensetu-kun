@@ -1,0 +1,80 @@
+{
+  "name": "mensetu-kun",
+  "version": "1.0.0",
+  "productName": "面接くん",
+  "main": "main/index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src electron-src",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix src electron-src",
+    "test": "jest",
+    "clean": "rimraf dist main out .next",
+    "dev-electron": "ntsc -p electron-src && electron .",
+    "pack-app": "tsc -p electron-src && electron-builder --dir",
+    "dist": "next build && next export && tsc -p electron-src && electron-builder"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.2.4",
+    "dexie": "^3.0.3",
+    "electron-is-dev": "^1.2.0",
+    "electron-next": "^3.1.5",
+    "next": "latest",
+    "next-pwa": "^5.0.4",
+    "postcss": "^8.2.4",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-hook-form": "^6.14.2",
+    "react-icons": "^4.1.0",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "tailwindcss": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.22",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-redux": "^7.1.16",
+    "@types/redux": "^3.6.0",
+    "@types/redux-thunk": "^2.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "better-typescript-lib": "^1.0.1",
+    "electron": "^11.2.1",
+    "electron-builder": "^22.9.1",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.8",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.5.0",
+    "typescript": "4.1"
+  },
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run lint:fix",
+      "pre-push": "yarn test --passWithNoTests"
+    }
+  },
+  "build": {
+    "mac": {
+      "icon": "./public/icons/icon.icns",
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "icon": "./public/icons/icon.ico",
+      "target": "msi"
+    }
+  }
+}
