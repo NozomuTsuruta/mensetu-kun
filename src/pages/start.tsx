@@ -1,33 +1,37 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { IStore } from "../redux";
 
 export default function Start() {
-  const [voices, setVoices] = useState<string[]>([]);
+  const [questionNum, setQuestionNum] = useState(0);
+  const questions = useSelector((state: IStore) => state.questions);
+
   useEffect(() => {
     const synth = window.speechSynthesis;
-    const utter = new SpeechSynthesisUtterance("");
+    const utter = new SpeechSynthesisUtterance();
     const voices = synth.getVoices();
     utter.voice = voices[0]; // 0, 58
     utter.lang = "ja-JP";
-    utter.pitch = -1000;
+    utter.pitch = 0;
+    utter.text = questions[questionNum].text;
     synth.speak(utter);
-    const recognition = new webkitSpeechRecognition();
-    recognition.start();
-    const speechRecognitionList = new webkitSpeechGrammarList();
-    recognition.grammars = speechRecognitionList;
-    recognition.lang = "ja-JP";
-    recognition.continuous = true;
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-    recognition.onresult = function (event) {
-      setVoices((prev) => [...prev, event.results[0][0].transcript]);
-      recognition.stop();
+    const timer = setTimeout(() => {
+      if (questionNum + 1 >= questions.length) {
+        return;
+      }
+      setQuestionNum((prev) => prev + 1);
+    }, 60000);
+    return () => {
+      clearTimeout(timer);
     };
-  }, [voices]);
+  }, [questionNum, questions]);
+
   return (
-    <ul>
-      {voices.map((voice) => (
-        <li key={voice}>{voice}</li>
-      ))}
-    </ul>
+    <div>
+      {questions[questionNum].text}
+      {questionNum + 1 < questions.length && (
+        <button onClick={() => setQuestionNum((prev) => prev + 1)}>次へ</button>
+      )}
+    </div>
   );
 }

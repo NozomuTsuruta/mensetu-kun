@@ -1,13 +1,13 @@
 import { ActionTypes, IQuestion } from "./types";
 import { Dispatch } from "redux";
 import { questionsTable } from "../../db";
-import uuid from "uuid";
+import { v4 as uuidV4 } from "uuid";
 
 export const createQuestion = ({
   ...question
 }: Omit<IQuestion, "id">) => async (dispatch: Dispatch) => {
   try {
-    const id = uuid.v4();
+    const id = uuidV4();
     await questionsTable.put({ id, ...question });
     dispatch({
       type: ActionTypes.CREATE_QUESTION,
