@@ -9,6 +9,7 @@ export const ActionTypes = {
   READ_QUESTIONS: "READ_QUESTIONS",
   UPDATE_QUESTION: "UPDATE_QUESTION",
   DELETE_QUESTION: "DELETE_QUESTION",
+  DELETE_ALL_QUESTIONS: "DELETE_ALL_QUESTIONS",
 } as const;
 
 export type IQuestionAction =
@@ -18,4 +19,5 @@ export type IQuestionAction =
       type: typeof ActionTypes.UPDATE_QUESTION;
       payload: { id: string; url?: string; date?: string; memo?: string };
     }
-  | { type: typeof ActionTypes.DELETE_QUESTION; payload: string };
+  | { type: typeof ActionTypes.DELETE_QUESTION; payload: string }
+  | { type: typeof ActionTypes.DELETE_ALL_QUESTIONS };

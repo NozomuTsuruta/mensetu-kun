@@ -6,6 +6,9 @@ module.exports = {
       outline: {
         blue: ["2px solid #0000ff", "-2px"],
       },
+      letterSpacing: {
+        widest2: ".5em",
+      },
     },
   },
   variants: {

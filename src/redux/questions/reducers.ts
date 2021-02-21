@@ -22,6 +22,8 @@ export const questionsReducer = (
       ];
     case ActionTypes.DELETE_QUESTION:
       return [...state.filter((question) => question.id !== action.payload)];
+    case ActionTypes.DELETE_ALL_QUESTIONS:
+      return initialState;
     default:
       return state;
   }

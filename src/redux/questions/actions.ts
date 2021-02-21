@@ -45,7 +45,7 @@ export const updateQustion = (
   }
 };
 
-export const deleteSQuestion = (id: string) => async (dispatch: Dispatch) => {
+export const deleteQuestion = (id: string) => async (dispatch: Dispatch) => {
   try {
     await questionsTable.delete(id);
     dispatch({
@@ -54,5 +54,16 @@ export const deleteSQuestion = (id: string) => async (dispatch: Dispatch) => {
     });
   } catch {
     alert("質問の削除に失敗しました");
+  }
+};
+
+export const deleteAllQuestion = () => async (dispatch: Dispatch) => {
+  try {
+    await questionsTable.clear();
+    dispatch({
+      type: ActionTypes.DELETE_ALL_QUESTIONS,
+    });
+  } catch {
+    alert("質問の全削除に失敗しました");
   }
 };
