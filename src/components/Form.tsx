@@ -13,7 +13,7 @@ export const Form: FC<IProps> = ({ submit }) => {
     formState: { isDirty },
     errors,
   } = useFormContext();
-  console.log(errors);
+
   return (
     <form className="flex" onSubmit={handleSubmit(submit)}>
       <input

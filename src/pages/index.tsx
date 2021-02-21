@@ -15,14 +15,6 @@ export default function Index() {
   const dispatch = useDispatch();
 
   const submit = (data: IForm) => {
-    if (data.text.trim().length < 8) {
-      methods.setError("text", {
-        type: "minLength",
-        message: "８文字以上入力してください",
-        shouldFocus: true,
-      });
-      return;
-    }
     dispatch(createQuestion(data));
     methods.reset();
   };
