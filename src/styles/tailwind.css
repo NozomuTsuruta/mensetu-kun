@@ -26,14 +26,22 @@
   ,
   .input {
     @apply h-10 pl-2 w-60;
-  },
+  }
+  ,
   .icon {
     @apply hover:bg-gray-200 cursor-pointer mr-4;
+  }
+  ,
+  .command {
+    @apply rounded-full p-2 border-2 hover:bg-gray-200;
   }
 }
 
 @layer utilities {
   .font-stick {
     font-family: "Stick", sans-serif;
+  },
+  .h-500px {
+    height: 500px;
   }
 }

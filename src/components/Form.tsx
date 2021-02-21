@@ -21,8 +21,10 @@ export const Form: FC<IProps> = ({ submit, mode, text, setEdit }) => {
   const ref = useOutsideClick(() => {
     console.log(mode, isDirty, setEdit);
     if (mode === "edit" && !!setEdit) {
-      if (isDirty && confirm("変更内容を保存せずに終了しますか？")) {
-        setEdit(false);
+      if (isDirty) {
+        if (confirm("変更内容を保存せずに終了しますか？")) {
+          setEdit(false);
+        }
       } else {
         setEdit(false);
       }
@@ -31,7 +33,7 @@ export const Form: FC<IProps> = ({ submit, mode, text, setEdit }) => {
 
   return (
     <form
-      className="flex mb-4"
+      className="inline-block mb-8"
       onSubmit={handleSubmit(submit)}
       ref={ref as RefObject<HTMLFormElement>}
     >
