@@ -30,7 +30,7 @@ export default function Start() {
       </div>
       <div className="flex justify-center border-2 p-4">
         <button
-          className="command mr-4"
+          className={`command mr-4 ${questionNum === 0 ? "disabled" : ""}`}
           onClick={() => setQuestionNum((prev) => prev - 1)}
           disabled={questionNum === 0}
         >
@@ -47,7 +47,9 @@ export default function Start() {
           )}
         </button>
         <button
-          className="command"
+          className={`command mr-4 ${
+            questionNum + 1 >= questions.length ? "disabled" : ""
+          }`}
           onClick={() => setQuestionNum((prev) => prev + 1)}
           disabled={questionNum + 1 >= questions.length}
         >
