@@ -1,5 +1,5 @@
 import Router from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Screen } from "../components/Screen";
 import { IStore } from "../redux";
@@ -10,33 +10,15 @@ import {
   IoMdPlay,
   IoMdSquare,
 } from "react-icons/io";
+import useSpeech from "../hooks/useSpeech";
 
 export default function Start() {
   const [questionNum, setQuestionNum] = useState(0);
   const questions = useSelector((state: IStore) => state.questions);
-
-  useEffect(() => {
-    if (questions.length === 0) {
-      return;
-    }
-    const synth = window.speechSynthesis;
-    const utter = new SpeechSynthesisUtterance();
-    const voices = synth.getVoices();
-    utter.voice = voices[0]; // 0, 58
-    utter.lang = "ja-JP";
-    utter.pitch = 1;
-    utter.text = questions[questionNum].text;
-    synth.speak(utter);
-    const timer = setTimeout(() => {
-      if (questionNum + 1 >= questions.length) {
-        return;
-      }
-      setQuestionNum((prev) => prev + 1);
-    }, 60000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [questionNum, questions]);
+  const { pause, paused, resume } = useSpeech(
+    questions[questionNum],
+    setQuestionNum
+  );
 
   return (
     <div>
@@ -57,8 +39,12 @@ export default function Start() {
         <button className="command mr-4" onClick={() => Router.push("/")}>
           <IoMdSquare size={30} />
         </button>
-        <button className="command mr-4" onClick={() => Router.push("/")}>
-          <IoMdPlay size={30} />
+        <button className="command mr-4">
+          {paused ? (
+            <IoMdPlay size={30} onClick={resume} />
+          ) : (
+            <IoMdPause size={30} onClick={pause} />
+          )}
         </button>
         <button
           className="command"

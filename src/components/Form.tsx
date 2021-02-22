@@ -19,7 +19,6 @@ export const Form: FC<IProps> = ({ submit, mode, text, setEdit }) => {
   } = useFormContext();
   const modeText = mode === "add" ? "追加" : "更新";
   const ref = useOutsideClick(() => {
-    console.log(mode, isDirty, setEdit);
     if (mode === "edit" && !!setEdit) {
       if (isDirty) {
         if (confirm("変更内容を保存せずに終了しますか？")) {
