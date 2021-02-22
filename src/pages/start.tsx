@@ -1,4 +1,3 @@
-import Router from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Screen } from "../components/Screen";
@@ -17,7 +16,7 @@ export default function Start() {
   const [questionNum, setQuestionNum] = useState(0);
   const questions = useSelector((state: IStore) => state.questions);
   const [loading, setLoading] = useState(true);
-  const { pause, paused, resume } = useSpeech(
+  const { pause, paused, resume, cancel } = useSpeech(
     questions[questionNum],
     setQuestionNum
   );
@@ -42,7 +41,7 @@ export default function Start() {
         >
           <IoIosSkipBackward size={30} />
         </button>
-        <button className="command mr-4" onClick={() => Router.push("/")}>
+        <button className="command mr-4" onClick={cancel}>
           <IoMdSquare size={30} />
         </button>
         <button className="command mr-4">

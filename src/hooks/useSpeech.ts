@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { IQuestion } from "../redux/questions/types";
+import Router from "next/router";
 
 const useSpeech = (
   question: IQuestion,
@@ -42,7 +43,12 @@ const useSpeech = (
     synth?.resume();
   };
 
-  return { pause, resume, paused };
+  const cancel = () => {
+    synth?.cancel();
+    Router.push("/");
+  };
+
+  return { pause, resume, cancel, paused };
 };
 
 export default useSpeech;
