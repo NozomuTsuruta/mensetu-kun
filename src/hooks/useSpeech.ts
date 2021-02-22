@@ -12,19 +12,21 @@ const useSpeech = (
     if (!process.browser || !question) {
       return;
     }
-    const synth = window.speechSynthesis;
-    setSynth(synth);
-    const uttr = new SpeechSynthesisUtterance();
-    const voices = synth.getVoices();
-    uttr.voice = voices[0]; // 0, 58
-    uttr.lang = "ja-JP";
-    uttr.pitch = 0;
-    uttr.rate = 0.8;
-    uttr.text = question.text;
-    synth.speak(uttr);
+    setTimeout(() => {
+      const synth = window.speechSynthesis;
+      setSynth(synth);
+      const uttr = new SpeechSynthesisUtterance();
+      const voices = synth.getVoices();
+      uttr.voice = voices[0]; // 0, 58
+      uttr.lang = "ja-JP";
+      uttr.pitch = 0;
+      uttr.rate = 0.8;
+      uttr.text = question.text;
+      synth.speak(uttr);
+    }, 2000);
     const timer = setTimeout(() => {
       setQuestionNum((prev) => prev + 1);
-    }, 60000);
+    }, question.time || 60000);
     return () => {
       clearTimeout(timer);
     };

@@ -1,6 +1,17 @@
 import { ActionTypes, IQuestion, IQuestionAction } from "./types";
 
-const initialState: IQuestion[] = [];
+const initialState: IQuestion[] = [
+  {
+    id: "1",
+    text: "初めまして、本日の面接を担当させていただく、面接くんと申します。",
+    time: 10000,
+  },
+  {
+    id: "2",
+    text: "まずは、自己紹介をお願いします。",
+    time: 60000,
+  },
+];
 
 export const questionsReducer = (
   state: IQuestion[] = initialState,
@@ -10,7 +21,7 @@ export const questionsReducer = (
     case ActionTypes.CREATE_QUESTION:
       return [...state, action.payload];
     case ActionTypes.READ_QUESTIONS:
-      return action.payload;
+      return [...state, ...action.payload];
     case ActionTypes.UPDATE_QUESTION:
       return [
         ...state.map((question) => {
