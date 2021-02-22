@@ -11,17 +11,23 @@ import {
   IoMdSquare,
 } from "react-icons/io";
 import useSpeech from "../hooks/useSpeech";
+import { Spinner } from "../components/Spinner";
 
 export default function Start() {
   const [questionNum, setQuestionNum] = useState(0);
   const questions = useSelector((state: IStore) => state.questions);
+  const [loading, setLoading] = useState(true);
   const { pause, paused, resume } = useSpeech(
     questions[questionNum],
     setQuestionNum
   );
+  setTimeout(() => {
+    setLoading(false);
+  }, 2000);
 
   return (
     <div>
+      {loading && <Spinner />}
       <Screen />
       <div className="bg-black pb-4">
         <h2 className="text-2xl mb-4 text-white text-center">
