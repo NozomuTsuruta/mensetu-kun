@@ -40,7 +40,8 @@
 @layer utilities {
   .font-stick {
     font-family: "Stick", sans-serif;
-  },
+  }
+  ,
   .h-500px {
     height: 500px;
   }

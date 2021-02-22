@@ -3,7 +3,13 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Screen } from "../components/Screen";
 import { IStore } from "../redux";
-import { AiOutlineDoubleRight, AiFillHome } from "react-icons/ai";
+import {
+  IoIosSkipForward,
+  IoIosSkipBackward,
+  IoMdPause,
+  IoMdPlay,
+  IoMdSquare,
+} from "react-icons/io";
 
 export default function Start() {
   const [questionNum, setQuestionNum] = useState(0);
@@ -41,17 +47,26 @@ export default function Start() {
         </h2>
       </div>
       <div className="flex justify-center border-2 p-4">
-        <button className="command mr-4" onClick={() => Router.push("/")}>
-          <AiFillHome size={30} />
+        <button
+          className="command mr-4"
+          onClick={() => setQuestionNum((prev) => prev - 1)}
+          disabled={questionNum === 0}
+        >
+          <IoIosSkipBackward size={30} />
         </button>
-        {questionNum + 1 < questions.length && (
-          <button
-            className="command"
-            onClick={() => setQuestionNum((prev) => prev + 1)}
-          >
-            <AiOutlineDoubleRight size={30} />
-          </button>
-        )}
+        <button className="command mr-4" onClick={() => Router.push("/")}>
+          <IoMdSquare size={30} />
+        </button>
+        <button className="command mr-4" onClick={() => Router.push("/")}>
+          <IoMdPlay size={30} />
+        </button>
+        <button
+          className="command"
+          onClick={() => setQuestionNum((prev) => prev + 1)}
+          disabled={questionNum + 1 >= questions.length}
+        >
+          <IoIosSkipForward size={30} />
+        </button>
       </div>
     </div>
   );
