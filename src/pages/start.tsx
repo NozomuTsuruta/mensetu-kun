@@ -33,7 +33,7 @@ export default function Start() {
       <Screen />
       <div className="bg-black pb-4">
         <h2 className="text-2xl mb-4 text-white text-center">
-          {questions.length > 0 && questions[questionNum].text}
+          {questions.length > 0 && !loading && questions[questionNum].text}
         </h2>
       </div>
       <div className="flex justify-center border-2 p-4">
