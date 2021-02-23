@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { IQuestion } from "../redux/questions/types";
 import Router from "next/router";
 import { useDispatch } from "react-redux";
-import { setAnswer } from "../redux/answers/actions";
+import { addAnswer } from "../redux/answers/actions";
 
 const useSpeech = (
   question: IQuestion,
@@ -58,7 +58,7 @@ const useSpeech = (
       for (let i = e.resultIndex; i < e.results.length; i++) {
         answer += e.results[i][0].transcript + "。";
       }
-      dispatch(setAnswer({ id: question.id, question: question.text, answer }));
+      dispatch(addAnswer({ id: question.id, question: question.text, answer }));
     };
   }, [synth.current?.speaking]);
 

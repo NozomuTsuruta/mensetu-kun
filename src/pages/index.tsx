@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form } from "../components/Form";
 import { List } from "../components/List";
 import { IStore } from "../redux";
-import { resetAnswers } from "../redux/answers/actions";
+import { readAnswers } from "../redux/answers/actions";
 import { createQuestion, deleteAllQuestion } from "../redux/questions/actions";
 import { IQuestion } from "../redux/questions/types";
 
@@ -16,7 +16,7 @@ export default function Index() {
   const methods = useForm();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(resetAnswers());
+    dispatch(readAnswers());
   }, []);
 
   const submit = (data: IForm) => {

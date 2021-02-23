@@ -1,10 +1,10 @@
 import { ActionTypes, IAnswer } from "./types";
 
-export const setAnswer = (answer: IAnswer) => ({
-  type: ActionTypes.SET_ANSWER,
+export const addAnswer = (answer: IAnswer) => ({
+  type: ActionTypes.ADD_ANSWER,
   payload: answer,
 });
 
-export const resetAnswers = () => ({
-  type: ActionTypes.RESET_ANSWERS,
+export const readAnswers = () => ({
+  type: ActionTypes.READ_ANSWERS,
 });

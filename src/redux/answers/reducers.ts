@@ -7,7 +7,7 @@ export const answersReducer = (
   action: IAnswerAction
 ) => {
   switch (action.type) {
-    case ActionTypes.SET_ANSWER:
+    case ActionTypes.ADD_ANSWER:
       if (state.some(({ id }) => id === action.payload.id)) {
         return state.map((el) => {
           if (el.id === action.payload.id) {
@@ -21,8 +21,19 @@ export const answersReducer = (
         });
       }
       return [...state, action.payload];
-    case ActionTypes.RESET_ANSWERS:
+    case ActionTypes.READ_ANSWERS:
       return initialState;
+    case ActionTypes.UPDATE_ANSWER:
+      return state.map((el) => {
+        if (el.id === action.payload.id) {
+          return {
+            id: el.id,
+            question: el.question,
+            answer: action.payload.answer,
+          };
+        }
+        return el;
+      });
     default:
       return state;
   }
