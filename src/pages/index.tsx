@@ -1,9 +1,11 @@
 import Router from "next/router";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Form } from "../components/Form";
 import { List } from "../components/List";
 import { IStore } from "../redux";
+import { resetAnswers } from "../redux/answers/actions";
 import { createQuestion, deleteAllQuestion } from "../redux/questions/actions";
 import { IQuestion } from "../redux/questions/types";
 
@@ -13,6 +15,9 @@ export default function Index() {
   const questions = useSelector((state: IStore) => state.questions);
   const methods = useForm();
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(resetAnswers());
+  }, []);
 
   const submit = (data: IForm) => {
     dispatch(createQuestion({ text: data.text, second: 60 }));
