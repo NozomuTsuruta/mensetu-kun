@@ -16,16 +16,19 @@ export default function Start() {
   const [questionNum, setQuestionNum] = useState(0);
   const questions = useSelector((state: IStore) => state.questions);
   const [loading, setLoading] = useState(true);
-  const { pause, paused, resume, cancel } = useSpeech(
+  const { pause, paused, resume, cancel, next, prev, count } = useSpeech(
     questions[questionNum],
-    setQuestionNum
+    setQuestionNum,
+    loading
   );
+
   setTimeout(() => {
     setLoading(false);
   }, 2000);
 
   return (
     <div>
+      <p className="text-2xl">{count}</p>
       {loading && <Spinner />}
       <Screen />
       <div className="bg-black pb-4">
@@ -36,7 +39,7 @@ export default function Start() {
       <div className="flex justify-center border-2 p-4">
         <button
           className={`command mr-4 ${questionNum === 0 ? "disabled" : ""}`}
-          onClick={() => setQuestionNum((prev) => prev - 1)}
+          onClick={prev}
           disabled={questionNum === 0}
         >
           <IoIosSkipBackward size={30} />
@@ -55,7 +58,7 @@ export default function Start() {
           className={`command mr-4 ${
             questionNum + 1 >= questions.length ? "disabled" : ""
           }`}
-          onClick={() => setQuestionNum((prev) => prev + 1)}
+          onClick={next}
           disabled={questionNum + 1 >= questions.length}
         >
           <IoIosSkipForward size={30} />

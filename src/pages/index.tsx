@@ -15,7 +15,7 @@ export default function Index() {
   const dispatch = useDispatch();
 
   const submit = (data: IForm) => {
-    dispatch(createQuestion(data));
+    dispatch(createQuestion({ text: data.text, second: 60 }));
     methods.reset();
   };
 

@@ -1,7 +1,7 @@
 export type IQuestion = {
   id: string;
   text: string;
-  time?: number;
+  second: number;
 };
 
 export const ActionTypes = {

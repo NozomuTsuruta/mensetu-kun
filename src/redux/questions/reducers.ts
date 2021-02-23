@@ -4,12 +4,12 @@ const initialState: IQuestion[] = [
   {
     id: "1",
     text: "初めまして、本日の面接を担当させていただく、面接くんと申します。",
-    time: 10000,
+    second: 8,
   },
   {
     id: "2",
     text: "まずは、自己紹介をお願いします。",
-    time: 60000,
+    second: 60,
   },
 ];
 

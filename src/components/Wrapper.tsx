@@ -7,7 +7,7 @@ export const Wrapper: FC = ({ children }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(readQuestions());
-  }, [dispatch]);
+  }, []);
   return (
     <>
       <Header />
