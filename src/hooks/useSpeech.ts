@@ -26,8 +26,6 @@ const useSpeech = (
     setUttr(uttr);
   }, []);
 
-  console.log(answer);
-
   useEffect(() => {
     if (!question || loading || paused || !synth || !uttr) {
       return;
@@ -49,15 +47,18 @@ const useSpeech = (
   }, [question]);
 
   useEffect(() => {
+    const rec = new webkitSpeechRecognition();
+    rec.continuous = true;
     if (synth?.speaking) {
+      rec.stop();
       return;
     }
-    const rec = new webkitSpeechRecognition();
     rec.start();
     rec.onresult = (e) => {
-      rec.stop();
-      console.log(e.results[0][0].transcript);
-      const answer = e.results[0][0].transcript;
+      let answer = "";
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        answer += e.results[i][0].transcript + "。";
+      }
       setAnswer((prev) => {
         if (prev.some(({ id }) => id === question.id)) {
           return prev.map((el) => {
