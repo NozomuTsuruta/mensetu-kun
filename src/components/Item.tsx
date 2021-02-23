@@ -14,7 +14,9 @@ export const Item: FC<IProps> = ({ id, text }) => {
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
   const deleteItem = () => {
-    if (confirm("質問を削除しますか？")) dispatch(deleteQuestion(id));
+    if (confirm("質問を削除しますか？")) {
+      dispatch(deleteQuestion(id));
+    }
   };
   const submit = (data: Omit<IQuestion, "id">) => {
     dispatch(updateQustion(id, data));

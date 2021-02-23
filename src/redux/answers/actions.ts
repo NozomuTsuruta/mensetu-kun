@@ -8,3 +8,8 @@ export const addAnswer = (answer: IAnswer) => ({
 export const readAnswers = () => ({
   type: ActionTypes.READ_ANSWERS,
 });
+
+export const updateAnswer = (answer: IAnswer) => ({
+  type: ActionTypes.UPDATE_ANSWER,
+  payload: answer,
+});
