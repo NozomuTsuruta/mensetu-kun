@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { IQuestion } from "../redux/questions/types";
 import Router from "next/router";
 import { useDispatch } from "react-redux";
@@ -10,29 +10,27 @@ const useSpeech = (
   loading: boolean
 ) => {
   const [paused, setPaused] = useState(false);
-  const [synth, setSynth] = useState<SpeechSynthesis>();
   const [count, setCount] = useState<number>(60);
-  const [uttr, setUttr] = useState<SpeechSynthesisUtterance>();
+  const synth = useRef<SpeechSynthesis>();
+  const uttr = useRef<SpeechSynthesisUtterance>();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const synth = window.speechSynthesis;
-    const uttr = new SpeechSynthesisUtterance();
-    const voices = synth.getVoices();
-    uttr.voice = voices[0]; // 0, 58
-    uttr.lang = "ja-JP";
-    uttr.pitch = 0;
-    uttr.rate = 0.8;
-    setSynth(synth);
-    setUttr(uttr);
+    synth.current = window.speechSynthesis;
+    uttr.current = new SpeechSynthesisUtterance();
+    const voices = synth.current.getVoices();
+    uttr.current.voice = voices[0]; // 0, 58
+    uttr.current.lang = "ja-JP";
+    uttr.current.pitch = 0;
+    uttr.current.rate = 0.8;
   }, []);
 
   useEffect(() => {
-    if (!question || loading || paused || !synth || !uttr) {
+    if (!question || loading || paused || !synth.current || !uttr.current) {
       return;
     }
-    uttr.text = question.text;
-    synth.speak(uttr);
+    uttr.current.text = question.text;
+    synth.current.speak(uttr.current);
     const timer = setTimeout(() => {
       setQuestionNum((prev) => prev + 1);
     }, question.second * 1000);
@@ -50,7 +48,7 @@ const useSpeech = (
   useEffect(() => {
     const rec = new webkitSpeechRecognition();
     rec.continuous = true;
-    if (synth?.speaking) {
+    if (synth.current?.speaking) {
       rec.stop();
       return;
     }
@@ -62,30 +60,30 @@ const useSpeech = (
       }
       dispatch(setAnswer({ id: question.id, question: question.text, answer }));
     };
-  }, [synth?.speaking]);
+  }, [synth.current?.speaking]);
 
   const pause = () => {
     setPaused(true);
-    synth?.pause();
+    synth.current?.pause();
   };
 
   const resume = () => {
     setPaused(false);
-    synth?.resume();
+    synth.current?.resume();
   };
 
   const cancel = () => {
-    synth?.cancel();
+    synth.current?.cancel();
     Router.push("/");
   };
 
   const prev = () => {
-    synth?.cancel();
+    synth.current?.cancel();
     setQuestionNum((prev) => prev - 1);
   };
 
   const next = () => {
-    synth?.cancel();
+    synth.current?.cancel();
     setQuestionNum((prev) => prev + 1);
   };
 
