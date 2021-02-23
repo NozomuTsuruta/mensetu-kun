@@ -27,8 +27,12 @@ export const Item: FC<IProps> = ({ id, text }) => {
     <div className="group p-4 bg-white mb-4">
       <h2 className="text-2xl">質問: {text}</h2>
       <div className="flex mt-4">
-        <RiEdit2Line className="icon" onClick={() => setEdit(true)} size={25} />
-        <RiDeleteBinLine className="icon" onClick={deleteItem} size={25} />
+        <button className="mr-4" onClick={() => setEdit(true)}>
+          <RiEdit2Line className="icon" size={25} />
+        </button>
+        <button onClick={deleteItem}>
+          <RiDeleteBinLine className="icon" size={25} />
+        </button>
       </div>
     </div>
   );

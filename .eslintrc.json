@@ -25,8 +25,7 @@
   "rules": {
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/rules-of-hooks": "error"
   },
   "overrides": [
     // typescript
@@ -45,13 +44,6 @@
       },
       "parserOptions": {
         "project": "./tsconfig.json"
-      }
-    },
-    // pages
-    {
-      "files": ["src/pages/*.tsx"],
-      "rules": {
-        "react-hooks/rules-of-hooks": "on"
       }
     }
   ],

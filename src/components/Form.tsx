@@ -32,7 +32,7 @@ export const Form: FC<IProps> = ({ submit, mode, text, setEdit }) => {
 
   return (
     <form
-      className="inline-block mb-8"
+      className="mb-8 form flex items-center"
       onSubmit={handleSubmit(submit)}
       ref={ref as RefObject<HTMLFormElement>}
     >
@@ -47,15 +47,12 @@ export const Form: FC<IProps> = ({ submit, mode, text, setEdit }) => {
             value: 8,
             message: "8文字以上入力してください",
           },
+          required: "8文字以上入力してください",
         })}
         placeholder={errors.text ? errors.text.message : `質問を${modeText}`}
         defaultValue={text || ""}
       />
-      <button
-        type="submit"
-        disabled={!isDirty || errors.text}
-        className={`button ${!isDirty || errors.text ? "disabled" : ""}`}
-      >
+      <button type="submit" className="button">
         {modeText}
       </button>
     </form>

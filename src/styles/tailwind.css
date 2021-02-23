@@ -17,7 +17,7 @@
 
 @layer components {
   .button {
-    @apply bg-black text-white px-5 py-2 hover:opacity-50;
+    @apply bg-black text-white px-5 py-2 hover:opacity-50 w-28;
   }
   ,
   .disabled {
@@ -25,11 +25,15 @@
   }
   ,
   .input {
-    @apply h-10 pl-2 w-60;
+    @apply h-10 pl-2 w-full;
+  }
+  ,
+  .form {
+    @apply w-1/2 min-w-60;
   }
   ,
   .icon {
-    @apply hover:bg-gray-200 cursor-pointer mr-4;
+    @apply hover:bg-gray-200 cursor-pointer;
   }
   ,
   .command {
@@ -68,5 +72,9 @@
   ,
   .h-500px {
     height: 500px;
+  }
+  ,
+  .min-w-60 {
+    min-width: 15rem;
   }
 }
