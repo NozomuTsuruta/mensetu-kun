@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { IQuestion } from "../redux/questions/types";
 import Router from "next/router";
-import { IAnswer } from "../redux/answers/type";
+import { useDispatch } from "react-redux";
+import { setAnswer } from "../redux/answers/actions";
 
 const useSpeech = (
   question: IQuestion,
@@ -12,7 +13,7 @@ const useSpeech = (
   const [synth, setSynth] = useState<SpeechSynthesis>();
   const [count, setCount] = useState<number>(60);
   const [uttr, setUttr] = useState<SpeechSynthesisUtterance>();
-  const [answer, setAnswer] = useState<IAnswer[]>([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const synth = window.speechSynthesis;
@@ -59,24 +60,7 @@ const useSpeech = (
       for (let i = e.resultIndex; i < e.results.length; i++) {
         answer += e.results[i][0].transcript + "。";
       }
-      setAnswer((prev) => {
-        if (prev.some(({ id }) => id === question.id)) {
-          return prev.map((el) => {
-            if (el.id === question.id) {
-              return {
-                id: el.id,
-                question: el.question,
-                answer: el.answer + answer,
-              };
-            }
-            return el;
-          });
-        }
-        return [
-          ...prev,
-          { id: question.id, question: question.text, answer: answer },
-        ];
-      });
+      dispatch(setAnswer({ id: question.id, question: question.text, answer }));
     };
   }, [synth?.speaking]);
 

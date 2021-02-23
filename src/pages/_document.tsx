@@ -42,14 +42,14 @@ class MyDocument extends Document {
             name="apple-mobile-web-app-status-bar-style"
             content="#282c34"
           />
-          <meta name="apple-mobile-web-app-title" content="URLeader" />
+          <meta name="apple-mobile-web-app-title" content="面接くん" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
             href="/icons/180x180.png"
           />
           {/* 一般 */}
-          <meta name="application-name" content="URLeader" />
+          <meta name="application-name" content="面接くん" />
           <meta name="theme-color" content="#282c34" />
           <meta name="description" content="簡単に面接練習" />
           <link rel="icon" sizes="192x192" href="/icons/192x192.png" />
