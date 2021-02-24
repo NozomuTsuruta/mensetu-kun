@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { Screen } from "../components/Screen";
 import { IStore } from "../redux";
@@ -16,7 +16,19 @@ import Router from "next/router";
 
 export default function Start() {
   const [questionNum, setQuestionNum] = useState(0);
-  const questions = useSelector((state: IStore) => state.questions);
+  const _questions = useSelector((state: IStore) => state.questions);
+  const questions = useMemo(
+    () => [
+      {
+        id: "0",
+        text:
+          "初めまして、本日の面接を担当させていただく、面接官です。よろしくお願いします。",
+        second: 10,
+      },
+      ..._questions,
+    ],
+    []
+  );
   const answersLength = useSelector((state: IStore) => state.answers.length);
   const [loading, setLoading] = useState(true);
   const { pause, paused, resume, cancel, next, prev, count } = useSpeech(

@@ -49,8 +49,7 @@ const useSpeech = (
     const rec = new webkitSpeechRecognition();
     rec.continuous = true;
     if (synth.current?.speaking) {
-      rec.stop();
-      return;
+      return rec.stop();
     }
     rec.start();
     rec.onresult = (e) => {
