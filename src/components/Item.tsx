@@ -26,7 +26,7 @@ export const Item: FC<IProps> = ({ id, text }) => {
   return edit ? (
     <Form mode="edit" submit={submit} text={text} setEdit={setEdit} />
   ) : (
-    <div className="group p-4 bg-white mb-4">
+    <div className="group p-4 bg-white mb-4 min-w-80 w-1/2">
       <h2 className="text-2xl">質問: {text}</h2>
       <div className="flex mt-4">
         <button className="mr-4" onClick={() => setEdit(true)}>
