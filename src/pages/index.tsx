@@ -1,5 +1,5 @@
 import Router from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Form } from "../components/Form";
@@ -8,16 +8,23 @@ import { IStore } from "../redux";
 import { readAnswers } from "../redux/answers/actions";
 import { createQuestion, deleteAllQuestion } from "../redux/questions/actions";
 import { IQuestion } from "../redux/questions/types";
+import { frequentQuestions } from "../util";
 
 type IForm = Omit<IQuestion, "id">;
 
 export default function Index() {
+  const [isFrequent, setIsFrequent] = useState(false);
   const questions = useSelector((state: IStore) => state.questions);
   const methods = useForm();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(readAnswers());
   }, []);
+  const list = isFrequent
+    ? frequentQuestions.filter(
+        ({ text }) => !questions.some((question) => question.text === text)
+      )
+    : questions;
 
   const submit = (data: IForm) => {
     dispatch(createQuestion({ text: data.text, second: 60 }));
@@ -43,12 +50,15 @@ export default function Index() {
         >
           全削除
         </button>
-        <button className="button" onClick={() => Router.push("/frequent")}>
-          一覧
+        <button
+          className="button"
+          onClick={() => setIsFrequent((prev) => !prev)}
+        >
+          {isFrequent ? "TOP" : "頻出"}
         </button>
       </div>
-      <Form mode="add" submit={submit} />
-      <List list={questions} />
+      {!isFrequent && <Form mode="add" submit={submit} />}
+      <List list={list} />
     </FormProvider>
   );
 }
