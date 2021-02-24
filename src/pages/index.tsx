@@ -37,11 +37,14 @@ export default function Index() {
           開始
         </button>
         <button
-          className={`button ${disabled ? "disabled" : ""}`}
+          className={`button mr-4 ${disabled ? "disabled" : ""}`}
           disabled={disabled}
           onClick={() => dispatch(deleteAllQuestion())}
         >
           全削除
+        </button>
+        <button className="button" onClick={() => Router.push("/frequent")}>
+          一覧
         </button>
       </div>
       <Form mode="add" submit={submit} />
