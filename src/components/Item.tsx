@@ -1,16 +1,22 @@
 import { FC, useState } from "react";
-import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
+import { RiAddFill, RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { deleteQuestion, updateQustion } from "../redux/questions/actions";
+import {
+  createQuestion,
+  deleteQuestion,
+  updateQustion,
+} from "../redux/questions/actions";
 import { IQuestion } from "../redux/questions/types";
 import { Form } from "./Form";
 
 type IProps = {
   id: string;
   text: string;
+  second: number;
+  isFrequent: boolean;
 };
 
-export const Item: FC<IProps> = ({ id, text }) => {
+export const Item: FC<IProps> = ({ id, text, second, isFrequent }) => {
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
   const deleteItem = () => {
@@ -22,6 +28,9 @@ export const Item: FC<IProps> = ({ id, text }) => {
     dispatch(updateQustion(id, data));
     setEdit(false);
   };
+  const addItem = () => {
+    dispatch(createQuestion({ text, second }));
+  };
 
   return edit ? (
     <Form mode="edit" submit={submit} text={text} setEdit={setEdit} />
@@ -29,12 +38,21 @@ export const Item: FC<IProps> = ({ id, text }) => {
     <div className="group p-4 bg-white mb-4 min-w-80 w-1/2">
       <h2 className="text-2xl">質問: {text}</h2>
       <div className="flex mt-4">
-        <button className="mr-4" onClick={() => setEdit(true)}>
-          <RiEdit2Line className="icon" size={25} />
-        </button>
-        <button onClick={deleteItem}>
-          <RiDeleteBinLine className="icon" size={25} />
-        </button>
+        <p className="mr-4">回答時間：{second}秒</p>
+        {isFrequent ? (
+          <button onClick={addItem}>
+            <RiAddFill className="icon" size={25} />
+          </button>
+        ) : (
+          <>
+            <button className="mr-4" onClick={() => setEdit(true)}>
+              <RiEdit2Line className="icon" size={25} />
+            </button>
+            <button onClick={deleteItem}>
+              <RiDeleteBinLine className="icon" size={25} />
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

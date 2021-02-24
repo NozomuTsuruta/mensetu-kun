@@ -58,7 +58,7 @@ export default function Index() {
         </button>
       </div>
       {!isFrequent && <Form mode="add" submit={submit} />}
-      <List list={list} />
+      <List list={list} isFrequent={isFrequent} />
     </FormProvider>
   );
 }

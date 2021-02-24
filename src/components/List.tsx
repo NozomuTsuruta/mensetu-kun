@@ -4,12 +4,19 @@ import { Item } from "./Item";
 
 type IProps = {
   list: IQuestion[];
+  isFrequent: boolean;
 };
 
-export const List: FC<IProps> = ({ list }) => (
-  <ul>
-    {list.map(({ id, text }) => (
-      <Item key={id} id={id} text={text} />
+export const List: FC<IProps> = ({ list, isFrequent }) => (
+  <ul className="mb-8">
+    {list.map(({ id, text, second }) => (
+      <Item
+        key={id}
+        id={id}
+        text={text}
+        second={second}
+        isFrequent={isFrequent}
+      />
     ))}
   </ul>
 );
