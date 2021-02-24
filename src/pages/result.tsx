@@ -1,5 +1,6 @@
 import Router from "next/router";
 import { useSelector } from "react-redux";
+import { ResultItem } from "../components/ResultItem";
 import { IStore } from "../redux";
 
 export default function Result() {
@@ -19,11 +20,8 @@ export default function Result() {
   return (
     <div>
       <h1 className="text-3xl mb-4">面接結果</h1>
-      {answers.map(({ id, answer, question }) => (
-        <div key={id} className="mb-4 bg-white">
-          <p>質問: {question}</p>
-          <p>あなたの回答: {answer}</p>
-        </div>
+      {answers.map((answer) => (
+        <ResultItem key={answer.id} {...answer} />
       ))}
       <button className="button w-auto mr-4" onClick={download}>
         結果をダウンロード
