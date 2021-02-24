@@ -8,13 +8,16 @@ import {
   IoMdPause,
   IoMdPlay,
   IoMdSquare,
+  IoMdCheckboxOutline,
 } from "react-icons/io";
 import useSpeech from "../hooks/useSpeech";
 import { Spinner } from "../components/Spinner";
+import Router from "next/router";
 
 export default function Start() {
   const [questionNum, setQuestionNum] = useState(0);
   const questions = useSelector((state: IStore) => state.questions);
+  const answersLength = useSelector((state: IStore) => state.answers.length);
   const [loading, setLoading] = useState(true);
   const { pause, paused, resume, cancel, next, prev, count } = useSpeech(
     questions[questionNum],
@@ -53,6 +56,13 @@ export default function Start() {
           ) : (
             <IoMdPause size={30} onClick={pause} />
           )}
+        </button>
+        <button
+          className={`command mr-4 ${answersLength === 0 ? "disabled" : ""}`}
+          onClick={() => Router.push("/result")}
+          disabled={answersLength === 0}
+        >
+          <IoMdCheckboxOutline size={30} />
         </button>
         <button
           className={`command mr-4 ${
