@@ -29,7 +29,7 @@
   }
   ,
   .form {
-    @apply w-1/2 min-w-60;
+    @apply w-3/4 min-w-68 lg:w-3/5;
   }
   ,
   .icon {
@@ -72,12 +72,5 @@
   ,
   .h-500px {
     height: 500px;
-  }
-  ,
-  .min-w-60 {
-    min-width: 15rem;
-  },
-  .min-w-80 {
-    min-width: 20rem;
   }
 }

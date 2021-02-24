@@ -33,25 +33,31 @@ export const Item: FC<IProps> = ({ id, text, second, isFrequent }) => {
   };
 
   return edit ? (
-    <Form mode="edit" submit={submit} text={text} setEdit={setEdit} />
+    <Form
+      mode="edit"
+      submit={submit}
+      text={text}
+      setEdit={setEdit}
+      second={second}
+    />
   ) : (
-    <div className="group p-4 bg-white mb-4 min-w-80 w-1/2">
+    <div className="group p-4 bg-white mb-4 w-3/4 min-w-68 lg:w-3/5">
       <h2 className="text-2xl">質問: {text}</h2>
-      <div className="flex mt-4">
+      <div className="flex justify-between mt-4">
         <p className="mr-4">回答時間：{second}秒</p>
         {isFrequent ? (
           <button onClick={addItem}>
             <RiAddFill className="icon" size={25} />
           </button>
         ) : (
-          <>
+          <div>
             <button className="mr-4" onClick={() => setEdit(true)}>
               <RiEdit2Line className="icon" size={25} />
             </button>
-            <button onClick={deleteItem}>
+            <button className="mr-4" onClick={deleteItem}>
               <RiDeleteBinLine className="icon" size={25} />
             </button>
-          </>
+          </div>
         )}
       </div>
     </div>

@@ -31,11 +31,11 @@ export default function Index() {
     methods.reset();
   };
 
-  const disabled = questions.length === 0;
+  const disabled = questions.length === 0 || isFrequent;
 
   return (
     <FormProvider {...methods}>
-      <div className="flex mb-4">
+      <div className="flex mb-8 min-w-68">
         <button
           className={`button mr-4 ${disabled ? "disabled" : ""}`}
           disabled={disabled}

@@ -9,6 +9,9 @@ module.exports = {
       letterSpacing: {
         widest2: ".5em",
       },
+      minWidth: {
+        68: "17rem",
+      },
     },
   },
   variants: {

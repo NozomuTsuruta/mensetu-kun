@@ -7,10 +7,11 @@ type IProps = {
   submit: (data: Omit<IQuestion, "id">) => void;
   mode: "add" | "edit";
   text?: string;
+  second?: number;
   setEdit?: Dispatch<SetStateAction<boolean>>;
 };
 
-export const Form: FC<IProps> = ({ submit, mode, text, setEdit }) => {
+export const Form: FC<IProps> = ({ submit, mode, text, second, setEdit }) => {
   const {
     handleSubmit,
     register,
@@ -50,7 +51,23 @@ export const Form: FC<IProps> = ({ submit, mode, text, setEdit }) => {
           required: "8文字以上入力してください",
         })}
         placeholder={errors.text ? errors.text.message : `質問を${modeText}`}
-        defaultValue={text || ""}
+        defaultValue={text}
+      />
+      <input
+        type="number"
+        name="second"
+        className={`h-10 pl-2 border-l-2 border-gray ${
+          errors.second ? "bg-red-300 border-red-700 border-2" : ""
+        }`}
+        ref={register({
+          min: {
+            value: 10,
+            message: "10秒以上",
+          },
+          required: "10秒以上",
+        })}
+        placeholder={errors.second ? errors.second.message : "秒数"}
+        defaultValue={second || 60}
       />
       <button type="submit" className="button">
         {modeText}

@@ -8,15 +8,19 @@ type IProps = {
 };
 
 export const List: FC<IProps> = ({ list, isFrequent }) => (
-  <ul className="mb-8">
-    {list.map(({ id, text, second }) => (
-      <Item
-        key={id}
-        id={id}
-        text={text}
-        second={second}
-        isFrequent={isFrequent}
-      />
-    ))}
+  <ul className="pb-8">
+    {list.length > 0 ? (
+      list.map(({ id, text, second }) => (
+        <Item
+          key={id}
+          id={id}
+          text={text}
+          second={second}
+          isFrequent={isFrequent}
+        />
+      ))
+    ) : (
+      <h1 className="text-2xl">質問がありません</h1>
+    )}
   </ul>
 );
